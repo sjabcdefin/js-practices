@@ -13,7 +13,7 @@ const endDate = new Date(year, startDate.getMonth() + 1, 0);
 
 console.log(`      ${month}月 ${year}`);
 console.log("日 月 火 水 木 金 土");
-process.stdout.write(" ".repeat(3 * startDate.getDay()));
+process.stdout.write("   ".repeat(startDate.getDay()));
 
 for (
   const date = new Date(startDate);
