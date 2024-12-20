@@ -15,6 +15,8 @@ console.log(`      ${month}月 ${year}`);
 console.log("日 月 火 水 木 金 土");
 process.stdout.write("   ".repeat(startDate.getDay()));
 
+let numberOfLines = 0;
+
 for (
   const date = new Date(startDate);
   date <= endDate;
@@ -23,8 +25,12 @@ for (
   process.stdout.write(`${String(date.getDate()).padStart(2, " ")}`);
   if (date.getDay() === 6) {
     process.stdout.write("\n");
+    numberOfLines++;
   } else {
     process.stdout.write(" ");
   }
 }
-process.stdout.write("\n\n");
+
+for (let lines = numberOfLines; lines < 6; lines++) {
+  process.stdout.write("\n");
+}
