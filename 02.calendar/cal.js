@@ -20,9 +20,11 @@ for (
   date <= endDate;
   date.setDate(date.getDate() + 1)
 ) {
-  process.stdout.write(`${String(date.getDate()).padStart(2, " ")} `);
+  process.stdout.write(`${String(date.getDate()).padStart(2, " ")}`);
   if (date.getDay() === 6) {
     process.stdout.write("\n");
+  } else {
+    process.stdout.write(" ");
   }
 }
 process.stdout.write("\n\n");
