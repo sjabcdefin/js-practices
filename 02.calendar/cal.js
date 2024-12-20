@@ -3,14 +3,15 @@
 import minimist from "minimist";
 
 const params = minimist(process.argv.slice(2));
-const month =
-  params["m"] === undefined ? new Date().getMonth() : params["m"] - 1;
-const year = params["y"] === undefined ? new Date().getFullYear() : params["y"];
 
-const start_of_month = new Date(year, month);
+const today = new Date();
+const month = params.m ?? today.getMonth() + 1;
+const year = params.y ?? today.getFullYear();
+
+const start_of_month = new Date(year, month - 1);
 const end_of_month = new Date(year, start_of_month.getMonth() + 1, 0);
 
-console.log(`      ${month + 1}月 ${year}     `);
+console.log(`      ${month}月 ${year}     `);
 console.log("日 月 火 水 木 金 土");
 process.stdout.write(" ".repeat(3 * start_of_month.getDay()));
 
