@@ -11,7 +11,7 @@ const year = params.y ?? today.getFullYear();
 const startDate = new Date(year, month - 1);
 const endDate = new Date(year, startDate.getMonth() + 1, 0);
 
-console.log(`      ${month}月 ${year}     `);
+console.log(`      ${month}月 ${year}`);
 console.log("日 月 火 水 木 金 土");
 process.stdout.write(" ".repeat(3 * startDate.getDay()));
 
