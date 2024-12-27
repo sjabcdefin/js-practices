@@ -23,7 +23,7 @@ for (
   date.setDate(date.getDate() + 1)
 ) {
   process.stdout.write(`${String(date.getDate()).padStart(2, " ")}`);
-  if (date.getDay() === 6) {
+  if (date.getDay() === 6 || date.getDate() === endDate.getDate()) {
     process.stdout.write("\n");
     lineBreakCount++;
   } else {
