@@ -31,6 +31,6 @@ for (
   }
 }
 
-for (lineBreakCount; lineBreakCount < 6; lineBreakCount++) {
+for (; lineBreakCount < 6; lineBreakCount++) {
   process.stdout.write("\n");
 }
