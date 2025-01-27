@@ -12,9 +12,9 @@ const createTableQuery = `
     title TEXT NOT NULL UNIQUE
   )
 `;
-const insertTitleQuery = `INSERT INTO books (title) VALUES (?)`;
-const selectAllQuery = `SELECT * FROM books`;
-const deleteTableQuery = `DROP TABLE books`;
+const insertTitleQuery = "INSERT INTO books (title) VALUES (?)";
+const selectAllQuery = "SELECT * FROM books";
+const deleteTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
 
