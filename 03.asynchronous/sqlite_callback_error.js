@@ -5,12 +5,8 @@ import sqlite3 from "sqlite3";
 sqlite3.verbose();
 const db = new sqlite3.Database(":memory:");
 
-const createTableQuery = `
-  CREATE TABLE books (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL UNIQUE
-  )
-`;
+const createTableQuery =
+  "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);";
 const insertTitleQuery = "INSERT INTO books (title) VALUES (?)";
 const selectAllQuery = "SELECT * FROM movies";
 const deleteTableQuery = "DROP TABLE books";
