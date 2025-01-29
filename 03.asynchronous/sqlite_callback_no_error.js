@@ -21,7 +21,7 @@ db.run(createTableQuery, [], function () {
       console.log(`Record inserted successfully with ID: ${this.lastID}`);
       db.run(insertTitleQuery, titles[2], function () {
         console.log(`Record inserted successfully with ID: ${this.lastID}`);
-        db.all(selectAllQuery, [], function (err, rows) {
+        db.all(selectAllQuery, [], (err, rows) => {
           console.log("All records fetched successfully");
           for (const row of rows) {
             console.log(`id:${row.id}, title:${row.title}`);

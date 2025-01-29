@@ -35,7 +35,7 @@ db.run(createTableQuery, [], function () {
         } else {
           console.log(`Record inserted successfully with ID: ${this.lastID}`);
         }
-        db.all(selectAllQuery, [], function (err, rows) {
+        db.all(selectAllQuery, [], (err, rows) => {
           if (err) {
             console.error(
               `Error occurred while fetching records: ${err.message}`,
