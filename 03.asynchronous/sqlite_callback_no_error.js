@@ -12,50 +12,26 @@ const selectAllQuery = "SELECT * FROM books";
 const deleteTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
-let insertCount = 0;
 
-function main() {
-  createTable();
-}
-
-function createTable() {
-  db.run(createTableQuery, insertTitles);
-}
-
-function insertTitles() {
+db.run(createTableQuery, function () {
   console.log("Table created");
-  for (const title of titles) {
-    db.run(insertTitleQuery, [title], displayID);
-  }
-}
-
-function displayID() {
-  console.log(`Record inserted successfully with ID: ${this.lastID}`);
-  insertCount++;
-  if (insertCount === titles.length) {
-    fetchAll();
-  }
-}
-
-function fetchAll() {
-  db.all(selectAllQuery, displayAll);
-}
-
-function displayAll(err, rows) {
-  console.log("All records fetched successfully");
-  for (const row of rows) {
-    console.log(`id:${row.id}, title:${row.title}`);
-  }
-  deleteTable();
-}
-
-function deleteTable() {
-  db.run(deleteTableQuery, closeDB);
-}
-
-function closeDB() {
-  console.log("Table deleted");
-  db.close();
-}
-
-main();
+  db.run(insertTitleQuery, titles[0], function () {
+    console.log(`Record inserted successfully with ID: ${this.lastID}`);
+    db.run(insertTitleQuery, titles[1], function () {
+      console.log(`Record inserted successfully with ID: ${this.lastID}`);
+      db.run(insertTitleQuery, titles[2], function () {
+        console.log(`Record inserted successfully with ID: ${this.lastID}`);
+        db.all(selectAllQuery, function (err, rows) {
+          console.log("All records fetched successfully");
+          for (const row of rows) {
+            console.log(`id:${row.id}, title:${row.title}`);
+          }
+          db.run(deleteTableQuery, function () {
+            console.log("Table deleted");
+            db.close();
+          });
+        });
+      });
+    });
+  });
+});
