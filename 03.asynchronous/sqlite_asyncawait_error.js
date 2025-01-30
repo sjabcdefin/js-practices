@@ -8,7 +8,7 @@ const db = new sqlite3.Database(":memory:");
 
 const createTableQuery =
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);";
-const insertTitleQuery = "INSERT INTO books (title) VALUES (?)";
+const insertBookRecordQuery = "INSERT INTO books (title) VALUES (?)";
 const selectAllQuery = "SELECT * FROM movies";
 const deleteTableQuery = "DROP TABLE books";
 
@@ -20,7 +20,7 @@ async function main() {
 
   for (const title of titles) {
     try {
-      const result = await runQueryAsync(db, insertTitleQuery, [title]);
+      const result = await runQueryAsync(db, insertBookRecordQuery, [title]);
       console.log(`Record inserted successfully with ID: ${result.lastID}`);
     } catch (err) {
       console.error(`Error occurred while inserting record: ${err.message}`);

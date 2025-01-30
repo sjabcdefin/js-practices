@@ -7,7 +7,7 @@ const db = new sqlite3.Database(":memory:");
 
 const createTableQuery =
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);";
-const insertTitleQuery = "INSERT INTO books (title) VALUES (?)";
+const insertBookRecordQuery = "INSERT INTO books (title) VALUES (?)";
 const selectAllQuery = "SELECT * FROM movies";
 const deleteTableQuery = "DROP TABLE books";
 
@@ -15,19 +15,19 @@ const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
 
 db.run(createTableQuery, [], function () {
   console.log("Table created");
-  db.run(insertTitleQuery, titles[0], function (err) {
+  db.run(insertBookRecordQuery, titles[0], function (err) {
     if (err) {
       console.error(`Error occurred while inserting record: ${err.message}`);
     } else {
       console.log(`Record inserted successfully with ID: ${this.lastID}`);
     }
-    db.run(insertTitleQuery, titles[1], function (err) {
+    db.run(insertBookRecordQuery, titles[1], function (err) {
       if (err) {
         console.error(`Error occurred while inserting record: ${err.message}`);
       } else {
         console.log(`Record inserted successfully with ID: ${this.lastID}`);
       }
-      db.run(insertTitleQuery, titles[2], function (err) {
+      db.run(insertBookRecordQuery, titles[2], function (err) {
         if (err) {
           console.error(
             `Error occurred while inserting record: ${err.message}`,

@@ -8,7 +8,7 @@ const db = new sqlite3.Database(":memory:");
 
 const createTableQuery =
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);";
-const insertTitleQuery = "INSERT INTO books (title) VALUES (?)";
+const insertBookRecordQuery = "INSERT INTO books (title) VALUES (?)";
 const selectAllQuery = "SELECT * FROM books";
 const deleteTableQuery = "DROP TABLE books";
 
@@ -19,7 +19,7 @@ function main() {
     .then(function () {
       console.log("Table created");
       const requests = titles.map(function (title) {
-        return runQueryAsync(db, insertTitleQuery, [title]).then(
+        return runQueryAsync(db, insertBookRecordQuery, [title]).then(
           function (result) {
             console.log(
               `Record inserted successfully with ID: ${result.lastID}`,
