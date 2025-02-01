@@ -40,7 +40,7 @@ function main() {
       return runQueryAsync(db, deleteTableQuery);
     })
     .then(function () {
-      console.log("Table was deleted successfylly");
+      console.log("Table was deleted successfully");
     })
     .finally(function () {
       db.close();

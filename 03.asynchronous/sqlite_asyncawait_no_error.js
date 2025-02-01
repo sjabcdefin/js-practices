@@ -30,7 +30,7 @@ async function main() {
   }
 
   await runQueryAsync(db, deleteTableQuery);
-  console.log("Table was deleted successfylly");
+  console.log("Table was deleted successfully");
   db.close();
 }
 

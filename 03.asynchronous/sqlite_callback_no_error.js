@@ -27,7 +27,7 @@ db.run(createTableQuery, [], function () {
             console.log(`id:${row.id}, title:${row.title}`);
           }
           db.run(deleteTableQuery, [], function () {
-            console.log("Table was deleted successfylly");
+            console.log("Table was deleted successfully");
             db.close();
           });
         });

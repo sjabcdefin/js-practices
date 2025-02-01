@@ -49,7 +49,7 @@ db.run(createTableQuery, [], function () {
             }
           }
           db.run(deleteTableQuery, [], function () {
-            console.log("Table was deleted successfylly");
+            console.log("Table was deleted successfully");
             db.close();
           });
         });
