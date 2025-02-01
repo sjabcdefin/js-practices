@@ -17,12 +17,12 @@ const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
 function main() {
   return runQueryAsync(db, createTableQuery)
     .then(function () {
-      console.log("Table created");
+      console.log("Table was created successfully");
       const requests = titles.map(function (title) {
         return runQueryAsync(db, insertBookRecordQuery, [title]).then(
           function (result) {
             console.log(
-              `Record inserted successfully with ID: ${result.lastID}`,
+              `Record was inserted successfully with ID: ${result.lastID}`,
             );
           },
         );
@@ -33,14 +33,14 @@ function main() {
       return allQueryAsync(db, selectAllQuery);
     })
     .then(function (rows) {
-      console.log("All records fetched successfully");
+      console.log("All records were fetched successfully");
       for (const row of rows) {
         console.log(`id:${row.id}, title:${row.title}`);
       }
       return runQueryAsync(db, deleteTableQuery);
     })
     .then(function () {
-      console.log("Table deleted");
+      console.log("Table was deleted successfylly");
     })
     .finally(function () {
       db.close();

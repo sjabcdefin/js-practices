@@ -14,20 +14,20 @@ const deleteTableQuery = "DROP TABLE books";
 const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
 
 db.run(createTableQuery, [], function () {
-  console.log("Table created");
+  console.log("Table was created successfully");
   db.run(insertBookRecordQuery, titles[0], function () {
-    console.log(`Record inserted successfully with ID: ${this.lastID}`);
+    console.log(`Record was inserted successfully with ID: ${this.lastID}`);
     db.run(insertBookRecordQuery, titles[1], function () {
-      console.log(`Record inserted successfully with ID: ${this.lastID}`);
+      console.log(`Record was inserted successfully with ID: ${this.lastID}`);
       db.run(insertBookRecordQuery, titles[2], function () {
-        console.log(`Record inserted successfully with ID: ${this.lastID}`);
+        console.log(`Record was inserted successfully with ID: ${this.lastID}`);
         db.all(selectAllQuery, [], (err, rows) => {
-          console.log("All records fetched successfully");
+          console.log("All records were fetched successfully");
           for (const row of rows) {
             console.log(`id:${row.id}, title:${row.title}`);
           }
           db.run(deleteTableQuery, [], function () {
-            console.log("Table deleted");
+            console.log("Table was deleted successfylly");
             db.close();
           });
         });

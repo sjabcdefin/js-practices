@@ -16,21 +16,21 @@ const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
 
 async function main() {
   await runQueryAsync(db, createTableQuery);
-  console.log("Table created");
+  console.log("Table was created successfully");
 
   for (const title of titles) {
     const result = await runQueryAsync(db, insertBookRecordQuery, [title]);
-    console.log(`Record inserted successfully with ID: ${result.lastID}`);
+    console.log(`Record was inserted successfully with ID: ${result.lastID}`);
   }
 
   const rows = await allQueryAsync(db, selectAllQuery);
-  console.log("All records fetched successfully");
+  console.log("All records were fetched successfully");
   for (const row of rows) {
     console.log(`id:${row.id}, title:${row.title}`);
   }
 
   await runQueryAsync(db, deleteTableQuery);
-  console.log("Table deleted");
+  console.log("Table was deleted successfylly");
   db.close();
 }
 

@@ -14,18 +14,18 @@ const deleteTableQuery = "DROP TABLE books";
 const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
 
 db.run(createTableQuery, [], function () {
-  console.log("Table created");
+  console.log("Table was created successfully");
   db.run(insertBookRecordQuery, titles[0], function (err) {
     if (err) {
       console.error(`Error occurred while inserting record: ${err.message}`);
     } else {
-      console.log(`Record inserted successfully with ID: ${this.lastID}`);
+      console.log(`Record was inserted successfully with ID: ${this.lastID}`);
     }
     db.run(insertBookRecordQuery, titles[1], function (err) {
       if (err) {
         console.error(`Error occurred while inserting record: ${err.message}`);
       } else {
-        console.log(`Record inserted successfully with ID: ${this.lastID}`);
+        console.log(`Record was inserted successfully with ID: ${this.lastID}`);
       }
       db.run(insertBookRecordQuery, titles[2], function (err) {
         if (err) {
@@ -33,7 +33,9 @@ db.run(createTableQuery, [], function () {
             `Error occurred while inserting record: ${err.message}`,
           );
         } else {
-          console.log(`Record inserted successfully with ID: ${this.lastID}`);
+          console.log(
+            `Record was inserted successfully with ID: ${this.lastID}`,
+          );
         }
         db.all(selectAllQuery, [], (err, rows) => {
           if (err) {
@@ -41,13 +43,13 @@ db.run(createTableQuery, [], function () {
               `Error occurred while fetching records: ${err.message}`,
             );
           } else {
-            console.log("All records fetched successfully");
+            console.log("All records were fetched successfully");
             for (const row of rows) {
               console.log(`id:${row.id}, title:${row.title}`);
             }
           }
           db.run(deleteTableQuery, [], function () {
-            console.log("Table deleted");
+            console.log("Table was deleted successfylly");
             db.close();
           });
         });
