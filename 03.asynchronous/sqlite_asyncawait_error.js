@@ -14,7 +14,7 @@ const dropTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
 
-async function main() {
+(async () => {
   await runQueryAsync(db, createTableQuery);
   console.log("Table was created successfully");
 
@@ -40,6 +40,4 @@ async function main() {
   await runQueryAsync(db, dropTableQuery);
   console.log("Table was deleted successfully");
   db.close();
-}
-
-main();
+})();

@@ -14,46 +14,42 @@ const dropTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
 
-function main() {
-  return runQueryAsync(db, createTableQuery)
-    .then(function () {
-      console.log("Table was created successfully");
-      const requests = titles.map(function (title) {
-        return runQueryAsync(db, insertRecordQuery, [title])
-          .then(function (result) {
-            console.log(
-              `Record was inserted successfully with ID: ${result.lastID}`,
-            );
-          })
-          .catch(function (err) {
-            console.error(
-              `Error occurred while inserting record: ${err.message}`,
-            );
-          });
-      });
-      return Promise.all(requests);
-    })
-    .then(function () {
-      return allQueryAsync(db, selectAllQuery);
-    })
-    .then(function (rows) {
-      console.log("All records were fetched successfully");
-      for (const row of rows) {
-        console.log(`id:${row.id}, title:${row.title}`);
-      }
-    })
-    .catch(function (err) {
-      console.error(`Error occurred while fetching records: ${err.message}`);
-    })
-    .then(function () {
-      return runQueryAsync(db, dropTableQuery);
-    })
-    .then(function () {
-      console.log("Table was deleted successfully");
-    })
-    .finally(function () {
-      db.close();
+runQueryAsync(db, createTableQuery)
+  .then(function () {
+    console.log("Table was created successfully");
+    const requests = titles.map(function (title) {
+      return runQueryAsync(db, insertRecordQuery, [title])
+        .then(function (result) {
+          console.log(
+            `Record was inserted successfully with ID: ${result.lastID}`,
+          );
+        })
+        .catch(function (err) {
+          console.error(
+            `Error occurred while inserting record: ${err.message}`,
+          );
+        });
     });
-}
-
-main();
+    return Promise.all(requests);
+  })
+  .then(function () {
+    return allQueryAsync(db, selectAllQuery);
+  })
+  .then(function (rows) {
+    console.log("All records were fetched successfully");
+    for (const row of rows) {
+      console.log(`id:${row.id}, title:${row.title}`);
+    }
+  })
+  .catch(function (err) {
+    console.error(`Error occurred while fetching records: ${err.message}`);
+  })
+  .then(function () {
+    return runQueryAsync(db, dropTableQuery);
+  })
+  .then(function () {
+    console.log("Table was deleted successfully");
+  })
+  .finally(function () {
+    db.close();
+  });
