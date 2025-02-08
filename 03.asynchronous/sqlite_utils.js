@@ -1,5 +1,5 @@
 export function runQueryAsync(db, query, params = []) {
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     db.run(query, params, function (err) {
       if (err) {
         reject(err);
@@ -11,8 +11,8 @@ export function runQueryAsync(db, query, params = []) {
 }
 
 export function allQueryAsync(db, query) {
-  return new Promise(function (resolve, reject) {
-    db.all(query, function (err, rows) {
+  return new Promise((resolve, reject) => {
+    db.all(query, (err, rows) => {
       if (err) {
         reject(err);
       } else {

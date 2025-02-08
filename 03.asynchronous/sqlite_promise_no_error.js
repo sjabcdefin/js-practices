@@ -15,32 +15,30 @@ const dropTableQuery = "DROP TABLE books";
 const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
 
 runQueryAsync(db, createTableQuery)
-  .then(function () {
+  .then(() => {
     console.log("Table was created successfully");
-    const requests = titles.map(function (title) {
-      return runQueryAsync(db, insertRecordQuery, [title]).then(
-        function (result) {
-          console.log(
-            `Record was inserted successfully with ID: ${result.lastID}`,
-          );
-        },
-      );
+    const requests = titles.map((title) => {
+      return runQueryAsync(db, insertRecordQuery, [title]).then((result) => {
+        console.log(
+          `Record was inserted successfully with ID: ${result.lastID}`,
+        );
+      });
     });
     return Promise.all(requests);
   })
-  .then(function () {
+  .then(() => {
     return allQueryAsync(db, selectAllQuery);
   })
-  .then(function (rows) {
+  .then((rows) => {
     console.log("All records were fetched successfully");
     for (const row of rows) {
       console.log(`id:${row.id}, title:${row.title}`);
     }
     return runQueryAsync(db, dropTableQuery);
   })
-  .then(function () {
+  .then(() => {
     console.log("Table was deleted successfully");
   })
-  .finally(function () {
+  .finally(() => {
     db.close();
   });
