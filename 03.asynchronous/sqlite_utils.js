@@ -10,9 +10,9 @@ export function runQueryAsync(db, query, params) {
   });
 }
 
-export function allQueryAsync(db, query) {
+export function allQueryAsync(db, query, params) {
   return new Promise((resolve, reject) => {
-    db.all(query, (err, rows) => {
+    db.all(query, params, (err, rows) => {
       if (err) {
         reject(err);
       } else {
