@@ -27,7 +27,9 @@ const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
       const result = await runQueryAsync(db, insertRecordQuery, [title]);
       console.log(`Record was inserted successfully with ID: ${result.lastID}`);
     } catch (err) {
-      console.error(`Error occurred while inserting record: ${err.message}`);
+      if (err.code === "SQLITE_CONSTRAINT") {
+        console.error(`Error occurred while inserting record: ${err.message}`);
+      }
     }
   }
 
@@ -38,7 +40,9 @@ const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
       console.log(`id:${row.id}, title:${row.title}`);
     }
   } catch (err) {
-    console.error(`Error occurred while fetching records: ${err.message}`);
+    if (err.code === "SQLITE_ERROR") {
+      console.error(`Error occurred while fetching records: ${err.message}`);
+    }
   }
 
   await runQueryAsync(db, dropTableQuery);

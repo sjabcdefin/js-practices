@@ -45,7 +45,9 @@ runQueryAsync(db, createTableQuery)
     console.log(`Record was inserted successfully with ID: ${result.lastID}`);
   })
   .catch((err) => {
-    console.error(`Error occurred while inserting record: ${err.message}`);
+    if (err.code === "SQLITE_CONSTRAINT") {
+      console.error(`Error occurred while inserting record: ${err.message}`);
+    }
   })
   .then(() => {
     return allQueryAsync(db, selectAllQuery);
@@ -57,7 +59,9 @@ runQueryAsync(db, createTableQuery)
     }
   })
   .catch((err) => {
-    console.error(`Error occurred while fetching records: ${err.message}`);
+    if (err.code === "SQLITE_ERROR") {
+      console.error(`Error occurred while fetching records: ${err.message}`);
+    }
   })
   .then(() => {
     return runQueryAsync(db, dropTableQuery);
