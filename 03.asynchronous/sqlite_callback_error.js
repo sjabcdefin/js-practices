@@ -13,7 +13,7 @@ const dropTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
 
-db.run(createTableQuery, [], function () {
+db.run(createTableQuery, function () {
   console.log("Table was created successfully");
   db.run(insertRecordQuery, titles[0], function (err) {
     if (err) {
@@ -37,7 +37,7 @@ db.run(createTableQuery, [], function () {
             `Record was inserted successfully with ID: ${this.lastID}`,
           );
         }
-        db.all(selectAllQuery, [], (err, rows) => {
+        db.all(selectAllQuery, (err, rows) => {
           if (err) {
             console.error(
               `Error occurred while fetching records: ${err.message}`,
@@ -48,7 +48,7 @@ db.run(createTableQuery, [], function () {
               console.log(`id:${row.id}, title:${row.title}`);
             }
           }
-          db.run(dropTableQuery, [], function () {
+          db.run(dropTableQuery, function () {
             console.log("Table was deleted successfully");
             db.close();
           });
