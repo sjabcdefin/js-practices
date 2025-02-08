@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
 import sqlite3 from "sqlite3";
-import { runQueryAsync, allQueryAsync } from "./sqlite_utils.js";
+import {
+  runQueryAsync,
+  allQueryAsync,
+  closeQueryAsync,
+} from "./sqlite_utils.js";
 
 sqlite3.verbose();
 const db = new sqlite3.Database(":memory:");
@@ -62,5 +66,5 @@ runQueryAsync(db, createTableQuery)
     console.log("Table was deleted successfully");
   })
   .finally(() => {
-    db.close();
+    return closeQueryAsync(db);
   });

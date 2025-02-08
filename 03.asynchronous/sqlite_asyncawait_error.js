@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
 import sqlite3 from "sqlite3";
-import { runQueryAsync, allQueryAsync } from "./sqlite_utils.js";
+import {
+  runQueryAsync,
+  allQueryAsync,
+  closeQueryAsync,
+} from "./sqlite_utils.js";
 
 sqlite3.verbose();
 const db = new sqlite3.Database(":memory:");
@@ -39,5 +43,6 @@ const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
 
   await runQueryAsync(db, dropTableQuery);
   console.log("Table was deleted successfully");
-  db.close();
+
+  await closeQueryAsync(db);
 })();

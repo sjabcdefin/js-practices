@@ -21,3 +21,15 @@ export function allQueryAsync(db, query) {
     });
   });
 }
+
+export function closeQueryAsync(db) {
+  return new Promise((resolve, reject) => {
+    db.close((err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
