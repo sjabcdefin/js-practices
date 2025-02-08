@@ -10,7 +10,7 @@ const createTableQuery =
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);";
 const insertRecordQuery = "INSERT INTO books (title) VALUES (?)";
 const selectAllQuery = "SELECT * FROM movies";
-const deleteTableQuery = "DROP TABLE books";
+const dropTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
 
@@ -46,7 +46,7 @@ function main() {
       console.error(`Error occurred while fetching records: ${err.message}`);
     })
     .then(function () {
-      return runQueryAsync(db, deleteTableQuery);
+      return runQueryAsync(db, dropTableQuery);
     })
     .then(function () {
       console.log("Table was deleted successfully");

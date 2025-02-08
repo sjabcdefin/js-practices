@@ -10,7 +10,7 @@ const createTableQuery =
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);";
 const insertRecordQuery = "INSERT INTO books (title) VALUES (?)";
 const selectAllQuery = "SELECT * FROM books";
-const deleteTableQuery = "DROP TABLE books";
+const dropTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
 
@@ -29,7 +29,7 @@ async function main() {
     console.log(`id:${row.id}, title:${row.title}`);
   }
 
-  await runQueryAsync(db, deleteTableQuery);
+  await runQueryAsync(db, dropTableQuery);
   console.log("Table was deleted successfully");
   db.close();
 }

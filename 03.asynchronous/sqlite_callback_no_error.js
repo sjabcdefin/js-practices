@@ -9,7 +9,7 @@ const createTableQuery =
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);";
 const insertRecordQuery = "INSERT INTO books (title) VALUES (?)";
 const selectAllQuery = "SELECT * FROM books";
-const deleteTableQuery = "DROP TABLE books";
+const dropTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
 
@@ -26,7 +26,7 @@ db.run(createTableQuery, [], function () {
           for (const row of rows) {
             console.log(`id:${row.id}, title:${row.title}`);
           }
-          db.run(deleteTableQuery, [], function () {
+          db.run(dropTableQuery, [], function () {
             console.log("Table was deleted successfully");
             db.close();
           });
