@@ -17,16 +17,18 @@ const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
 runQueryAsync(db, createTableQuery)
   .then(() => {
     console.log("Table was created successfully");
-    const requests = titles.map((title) => {
-      return runQueryAsync(db, insertRecordQuery, [title]).then((result) => {
-        console.log(
-          `Record was inserted successfully with ID: ${result.lastID}`,
-        );
-      });
-    });
-    return Promise.all(requests);
+    return runQueryAsync(db, insertRecordQuery, titles[0]);
   })
-  .then(() => {
+  .then((result) => {
+    console.log(`Record was inserted successfully with ID: ${result.lastID}`);
+    return runQueryAsync(db, insertRecordQuery, titles[1]);
+  })
+  .then((result) => {
+    console.log(`Record was inserted successfully with ID: ${result.lastID}`);
+    return runQueryAsync(db, insertRecordQuery, titles[2]);
+  })
+  .then((result) => {
+    console.log(`Record was inserted successfully with ID: ${result.lastID}`);
     return allQueryAsync(db, selectAllQuery);
   })
   .then((rows) => {
