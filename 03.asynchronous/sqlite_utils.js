@@ -1,4 +1,4 @@
-export function runQueryAsync(db, query, params = []) {
+export function runQueryAsync(db, query, params) {
   return new Promise((resolve, reject) => {
     db.run(query, params, function (err) {
       if (err) {
