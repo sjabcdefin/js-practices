@@ -29,18 +29,14 @@ runQueryAsync(db, createTableQuery)
   .catch((err) => {
     console.error(`Error occurred while inserting record: ${err.message}`);
   })
-  .then(() => {
-    return runQueryAsync(db, insertRowQuery, titles[1]);
-  })
+  .then(() => runQueryAsync(db, insertRowQuery, titles[1]))
   .then((result) => {
     console.log(`Record was inserted successfully with ID: ${result.lastID}`);
   })
   .catch((err) => {
     console.error(`Error occurred while inserting record: ${err.message}`);
   })
-  .then(() => {
-    return runQueryAsync(db, insertRowQuery, titles[2]);
-  })
+  .then(() => runQueryAsync(db, insertRowQuery, titles[2]))
   .then((result) => {
     console.log(`Record was inserted successfully with ID: ${result.lastID}`);
   })
@@ -49,9 +45,7 @@ runQueryAsync(db, createTableQuery)
       console.error(`Error occurred while inserting record: ${err.message}`);
     }
   })
-  .then(() => {
-    return allQueryAsync(db, selectAllRowsQuery);
-  })
+  .then(() => allQueryAsync(db, selectAllRowsQuery))
   .then((rows) => {
     console.log("All records were fetched successfully");
     for (const row of rows) {
@@ -63,12 +57,8 @@ runQueryAsync(db, createTableQuery)
       console.error(`Error occurred while fetching records: ${err.message}`);
     }
   })
-  .then(() => {
-    return runQueryAsync(db, dropTableQuery);
-  })
+  .then(() => runQueryAsync(db, dropTableQuery))
   .then(() => {
     console.log("Table was deleted successfully");
   })
-  .finally(() => {
-    return closeDatabaseAsync(db);
-  });
+  .finally(() => closeDatabaseAsync(db));

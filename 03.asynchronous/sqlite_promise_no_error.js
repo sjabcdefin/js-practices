@@ -45,6 +45,4 @@ runQueryAsync(db, createTableQuery)
   .then(() => {
     console.log("Table was deleted successfully");
   })
-  .finally(() => {
-    return closeDatabaseAsync(db);
-  });
+  .finally(() => closeDatabaseAsync(db));
