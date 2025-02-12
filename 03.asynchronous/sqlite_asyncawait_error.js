@@ -4,7 +4,7 @@ import sqlite3 from "sqlite3";
 import {
   runQueryAsync,
   allQueryAsync,
-  closeQueryAsync,
+  closeDatabaseAsync,
 } from "./sqlite_utils.js";
 
 sqlite3.verbose();
@@ -48,5 +48,5 @@ const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
   await runQueryAsync(db, dropTableQuery);
   console.log("Table was deleted successfully");
 
-  await closeQueryAsync(db);
+  await closeDatabaseAsync(db);
 })();

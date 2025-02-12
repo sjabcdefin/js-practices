@@ -4,7 +4,7 @@ import sqlite3 from "sqlite3";
 import {
   runQueryAsync,
   allQueryAsync,
-  closeQueryAsync,
+  closeDatabaseAsync,
 } from "./sqlite_utils.js";
 
 sqlite3.verbose();
@@ -70,5 +70,5 @@ runQueryAsync(db, createTableQuery)
     console.log("Table was deleted successfully");
   })
   .finally(() => {
-    return closeQueryAsync(db);
+    return closeDatabaseAsync(db);
   });

@@ -22,7 +22,7 @@ export function allQueryAsync(db, query, params) {
   });
 }
 
-export function closeQueryAsync(db) {
+export function closeDatabaseAsync(db) {
   return new Promise((resolve, reject) => {
     db.close((err) => {
       if (err) {
