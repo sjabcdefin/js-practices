@@ -27,8 +27,10 @@ try {
       const result = await runQueryAsync(db, insertRowQuery, [title]);
       console.log(`Record was inserted successfully with ID: ${result.lastID}`);
     } catch (err) {
-      if (err.code === "SQLITE_CONSTRAINT") {
+      if (err instanceof Error && err.code === "SQLITE_CONSTRAINT") {
         console.error(`Error occurred while inserting record: ${err.message}`);
+      } else {
+        throw new Error("Unexpected error occured while inserting record");
       }
     }
   }
@@ -40,13 +42,17 @@ try {
       console.log(`id:${row.id}, title:${row.title}`);
     }
   } catch (err) {
-    if (err.code === "SQLITE_ERROR") {
+    if (err instanceof Error && err.code === "SQLITE_ERROR") {
       console.error(`Error occurred while fetching records: ${err.message}`);
+    } else {
+      throw new Error("Unexpected error occured while fetching records");
     }
   }
 
   await runQueryAsync(db, dropTableQuery);
   console.log("Table was deleted successfully");
+} catch (err) {
+  console.error(err);
 } finally {
   await closeDatabaseAsync(db);
 }
