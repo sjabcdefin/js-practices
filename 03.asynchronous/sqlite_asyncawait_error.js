@@ -18,35 +18,33 @@ const dropTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
 
-(async () => {
-  await runQueryAsync(db, createTableQuery);
-  console.log("Table was created successfully");
+await runQueryAsync(db, createTableQuery);
+console.log("Table was created successfully");
 
-  for (const title of titles) {
-    try {
-      const result = await runQueryAsync(db, insertRowQuery, [title]);
-      console.log(`Record was inserted successfully with ID: ${result.lastID}`);
-    } catch (err) {
-      if (err.code === "SQLITE_CONSTRAINT") {
-        console.error(`Error occurred while inserting record: ${err.message}`);
-      }
-    }
-  }
-
+for (const title of titles) {
   try {
-    const rows = await allQueryAsync(db, selectAllRowsQuery);
-    console.log("All records were fetched successfully");
-    for (const row of rows) {
-      console.log(`id:${row.id}, title:${row.title}`);
-    }
+    const result = await runQueryAsync(db, insertRowQuery, [title]);
+    console.log(`Record was inserted successfully with ID: ${result.lastID}`);
   } catch (err) {
-    if (err.code === "SQLITE_ERROR") {
-      console.error(`Error occurred while fetching records: ${err.message}`);
+    if (err.code === "SQLITE_CONSTRAINT") {
+      console.error(`Error occurred while inserting record: ${err.message}`);
     }
   }
+}
 
-  await runQueryAsync(db, dropTableQuery);
-  console.log("Table was deleted successfully");
+try {
+  const rows = await allQueryAsync(db, selectAllRowsQuery);
+  console.log("All records were fetched successfully");
+  for (const row of rows) {
+    console.log(`id:${row.id}, title:${row.title}`);
+  }
+} catch (err) {
+  if (err.code === "SQLITE_ERROR") {
+    console.error(`Error occurred while fetching records: ${err.message}`);
+  }
+}
 
-  await closeDatabaseAsync(db);
-})();
+await runQueryAsync(db, dropTableQuery);
+console.log("Table was deleted successfully");
+
+await closeDatabaseAsync(db);

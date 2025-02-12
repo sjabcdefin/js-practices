@@ -18,23 +18,21 @@ const dropTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
 
-(async () => {
-  await runQueryAsync(db, createTableQuery);
-  console.log("Table was created successfully");
+await runQueryAsync(db, createTableQuery);
+console.log("Table was created successfully");
 
-  for (const title of titles) {
-    const result = await runQueryAsync(db, insertRowQuery, [title]);
-    console.log(`Record was inserted successfully with ID: ${result.lastID}`);
-  }
+for (const title of titles) {
+  const result = await runQueryAsync(db, insertRowQuery, [title]);
+  console.log(`Record was inserted successfully with ID: ${result.lastID}`);
+}
 
-  const rows = await allQueryAsync(db, selectAllRowsQuery);
-  console.log("All records were fetched successfully");
-  for (const row of rows) {
-    console.log(`id:${row.id}, title:${row.title}`);
-  }
+const rows = await allQueryAsync(db, selectAllRowsQuery);
+console.log("All records were fetched successfully");
+for (const row of rows) {
+  console.log(`id:${row.id}, title:${row.title}`);
+}
 
-  await runQueryAsync(db, dropTableQuery);
-  console.log("Table was deleted successfully");
+await runQueryAsync(db, dropTableQuery);
+console.log("Table was deleted successfully");
 
-  await closeDatabaseAsync(db);
-})();
+await closeDatabaseAsync(db);
