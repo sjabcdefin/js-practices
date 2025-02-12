@@ -12,8 +12,8 @@ const db = new sqlite3.Database(":memory:");
 
 const createTableQuery =
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);";
-const insertRecordQuery = "INSERT INTO books (title) VALUES (?)";
-const selectAllQuery = "SELECT * FROM books";
+const insertRowQuery = "INSERT INTO books (title) VALUES (?)";
+const selectAllRowsQuery = "SELECT * FROM books";
 const dropTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
@@ -21,19 +21,19 @@ const titles = ["I Am a Cat", "KOKORO", "SANSHIRO"];
 runQueryAsync(db, createTableQuery)
   .then(() => {
     console.log("Table was created successfully");
-    return runQueryAsync(db, insertRecordQuery, titles[0]);
+    return runQueryAsync(db, insertRowQuery, titles[0]);
   })
   .then((result) => {
     console.log(`Record was inserted successfully with ID: ${result.lastID}`);
-    return runQueryAsync(db, insertRecordQuery, titles[1]);
+    return runQueryAsync(db, insertRowQuery, titles[1]);
   })
   .then((result) => {
     console.log(`Record was inserted successfully with ID: ${result.lastID}`);
-    return runQueryAsync(db, insertRecordQuery, titles[2]);
+    return runQueryAsync(db, insertRowQuery, titles[2]);
   })
   .then((result) => {
     console.log(`Record was inserted successfully with ID: ${result.lastID}`);
-    return allQueryAsync(db, selectAllQuery);
+    return allQueryAsync(db, selectAllRowsQuery);
   })
   .then((rows) => {
     console.log("All records were fetched successfully");

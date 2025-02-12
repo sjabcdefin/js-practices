@@ -7,27 +7,27 @@ const db = new sqlite3.Database(":memory:");
 
 const createTableQuery =
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);";
-const insertRecordQuery = "INSERT INTO books (title) VALUES (?)";
-const selectAllQuery = "SELECT * FROM movies";
+const insertRowQuery = "INSERT INTO books (title) VALUES (?)";
+const selectAllRowsQuery = "SELECT * FROM movies";
 const dropTableQuery = "DROP TABLE books";
 
 const titles = ["I Am a Cat", "I Am a Cat", "SANSHIRO"];
 
 db.run(createTableQuery, () => {
   console.log("Table was created successfully");
-  db.run(insertRecordQuery, titles[0], function (err) {
+  db.run(insertRowQuery, titles[0], function (err) {
     if (err) {
       console.error(`Error occurred while inserting record: ${err.message}`);
     } else {
       console.log(`Record was inserted successfully with ID: ${this.lastID}`);
     }
-    db.run(insertRecordQuery, titles[1], function (err) {
+    db.run(insertRowQuery, titles[1], function (err) {
       if (err) {
         console.error(`Error occurred while inserting record: ${err.message}`);
       } else {
         console.log(`Record was inserted successfully with ID: ${this.lastID}`);
       }
-      db.run(insertRecordQuery, titles[2], function (err) {
+      db.run(insertRowQuery, titles[2], function (err) {
         if (err) {
           console.error(
             `Error occurred while inserting record: ${err.message}`,
@@ -37,7 +37,7 @@ db.run(createTableQuery, () => {
             `Record was inserted successfully with ID: ${this.lastID}`,
           );
         }
-        db.all(selectAllQuery, (err, rows) => {
+        db.all(selectAllRowsQuery, (err, rows) => {
           if (err) {
             console.error(
               `Error occurred while fetching records: ${err.message}`,
