@@ -30,7 +30,7 @@ try {
       if (err instanceof Error && err.code === "SQLITE_CONSTRAINT") {
         console.error(`Error occurred while inserting record: ${err.message}`);
       } else {
-        throw new Error("Unexpected error occured while inserting record");
+        throw err;
       }
     }
   }
@@ -45,7 +45,7 @@ try {
     if (err instanceof Error && err.code === "SQLITE_ERROR") {
       console.error(`Error occurred while fetching records: ${err.message}`);
     } else {
-      throw new Error("Unexpected error occured while fetching records");
+      throw err;
     }
   }
 
