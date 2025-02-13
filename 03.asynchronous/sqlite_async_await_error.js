@@ -51,8 +51,6 @@ try {
 
   await runQueryAsync(db, dropTableQuery);
   console.log("Table was deleted successfully");
-} catch (err) {
-  console.error(err);
 } finally {
   await closeDatabaseAsync(db);
 }
