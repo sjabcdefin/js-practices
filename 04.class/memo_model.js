@@ -2,9 +2,9 @@ class MemoModel {
   #id;
   #content;
 
-  constructor(id = null, content = "") {
-    this.#id = id;
-    this.#content = content;
+  constructor({ id = null, content = "" } = {}) {
+    this.id = id;
+    this.content = content;
   }
 
   get id() {
@@ -15,6 +15,9 @@ class MemoModel {
     return this.#content;
   }
 
+  set id(memoId) {
+    this.#id = memoId;
+  }
   set content(memoContent) {
     this.#content = memoContent;
   }
@@ -35,7 +38,9 @@ class MemoModel {
       throw new Error(
         "No memos available. Use the app without options to add a new memo.",
       );
-    return rows.map((row) => new MemoModel(row.id, row.content));
+    return rows.map(
+      (row) => new MemoModel({ id: row.id, content: row.content }),
+    );
   }
 
   async fetchById(database) {
