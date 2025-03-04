@@ -1,10 +1,8 @@
 class MemoModel {
-  #database;
   #id;
   #content;
 
-  constructor(memoDB, id = null, content = "") {
-    this.#database = memoDB;
+  constructor(id = null, content = "") {
     this.#id = id;
     this.#content = content;
   }
@@ -25,30 +23,28 @@ class MemoModel {
     return !this.#content;
   }
 
-  async save() {
+  async save(database) {
     if (this.#isContentEmpty())
       throw new Error("Memo content cannot be empty. Please enter some text.");
-    await this.#database.add(this.content);
+    await database.add(this.content);
   }
 
-  async fetchAll() {
-    const rows = await this.#database.getAll();
+  async fetchAll(database) {
+    const rows = await database.getAll();
     if (!rows.length)
       throw new Error(
         "No memos available. Use the app without options to add a new memo.",
       );
-    return rows.map(
-      (row) => new MemoModel(this.#database, row.id, row.content),
-    );
+    return rows.map((row) => new MemoModel(row.id, row.content));
   }
 
-  async fetchById() {
-    const row = await this.#database.getById(this.id);
+  async fetchById(database) {
+    const row = await database.getById(this.id);
     this.content = row.content;
   }
 
-  async delete() {
-    await this.#database.delete(this.id);
+  async delete(database) {
+    await database.delete(this.id);
   }
 }
 

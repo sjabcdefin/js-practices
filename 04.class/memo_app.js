@@ -92,7 +92,7 @@ class MemoApp {
   }
 
   async #fetchMemos() {
-    const rows = await new MemoModel(this.#database).fetchAll();
+    const rows = await new MemoModel().fetchAll(this.#database);
     return rows.map((row) => ({
       name: row.content.split("\n")[0],
       value: row.id,
@@ -101,7 +101,7 @@ class MemoApp {
 
   async #addMemo() {
     const content = await this.#inputMemo();
-    await new MemoModel(this.#database, undefined, content).save();
+    await new MemoModel(undefined, content).save(this.#database);
   }
 
   async #displayMemos() {
@@ -111,14 +111,14 @@ class MemoApp {
 
   async #displayMemoContent() {
     const answer = await this.#selectMemo();
-    const memo = new MemoModel(this.#database, answer.memoId);
-    await memo.fetchById();
+    const memo = new MemoModel(answer.memoId);
+    await memo.fetchById(this.#database);
     console.log(memo.content);
   }
 
   async #deleteMemo() {
     const answer = await this.#selectMemo("delete");
-    await new MemoModel(this.#database, answer.memoId).delete();
+    await new MemoModel(answer.memoId).delete(this.#database);
   }
 }
 
