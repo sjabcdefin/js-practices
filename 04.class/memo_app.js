@@ -1,6 +1,6 @@
 import { createInterface } from "node:readline/promises";
 import enquirer from "enquirer";
-import Memo from "./memo.js";
+import MemoModel from "./memo_model.js";
 import MemoDatabase from "./memo_database.js";
 
 class MemoApp {
@@ -92,7 +92,7 @@ class MemoApp {
   }
 
   async #fetchMemos() {
-    const rows = await new Memo(this.#database).fetchAll();
+    const rows = await new MemoModel(this.#database).fetchAll();
     return rows.map((row) => ({
       name: row.content.split("\n")[0],
       value: row.id,
@@ -101,7 +101,7 @@ class MemoApp {
 
   async #addMemo() {
     const content = await this.#inputMemo();
-    await new Memo(this.#database, undefined, content).save();
+    await new MemoModel(this.#database, undefined, content).save();
   }
 
   async #displayMemos() {
@@ -111,14 +111,14 @@ class MemoApp {
 
   async #displayMemoContent() {
     const answer = await this.#selectMemo();
-    const memo = new Memo(this.#database, answer.memoId);
+    const memo = new MemoModel(this.#database, answer.memoId);
     await memo.fetchById();
     console.log(memo.content);
   }
 
   async #deleteMemo() {
     const answer = await this.#selectMemo("delete");
-    await new Memo(this.#database, answer.memoId).delete();
+    await new MemoModel(this.#database, answer.memoId).delete();
   }
 }
 
