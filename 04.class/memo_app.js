@@ -61,7 +61,6 @@ class MemoApp {
   async #inputMemo() {
     const rl = createInterface({
       input: process.stdin,
-      output: process.stdout,
     });
     let memoContent = "";
     try {
