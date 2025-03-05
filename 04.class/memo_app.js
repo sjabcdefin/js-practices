@@ -10,7 +10,7 @@ class MemoApp {
     this.#database = new MemoDatabase("memo.db");
   }
 
-  async handleOption() {
+  async executeMemoCommand() {
     try {
       const option = this.#commandLineOption();
       await this.#database.createTable();
