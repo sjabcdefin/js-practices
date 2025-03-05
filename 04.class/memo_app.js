@@ -28,8 +28,11 @@ class MemoApp {
           await this.#addMemo();
       }
     } catch (err) {
-      if (err instanceof Error) console.error(`Error: ${err.message}`);
-      else console.error("An unknown error occurred.");
+      if (err instanceof Error) {
+        console.error(`Error: ${err.message}`);
+      } else {
+        console.error("An unknown error occurred.");
+      }
     } finally {
       await this.#database.closeDatabase();
     }
@@ -46,10 +49,12 @@ class MemoApp {
 
   #commandLineOption() {
     const option = process.argv[2];
-    if (this.#hasMultipleOptions())
+    if (this.#hasMultipleOptions()) {
       throw new Error("Only one option is allowed. Use one of: -l, -r, -d.");
-    if (this.#isInvalidOption(option))
+    }
+    if (this.#isInvalidOption(option)) {
       throw new Error("Invalid option. Available options: -l, -r, -d.");
+    }
     return option;
   }
 
@@ -86,8 +91,11 @@ class MemoApp {
       ];
       return await prompt(question);
     } catch (err) {
-      if (!err) throw new Error("Selecting memo was canceled.");
-      throw err;
+      if (!err) {
+        throw new Error("Selecting memo was canceled.");
+      } else {
+        throw err;
+      }
     }
   }
 

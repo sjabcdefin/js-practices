@@ -27,17 +27,19 @@ class MemoModel {
   }
 
   async save(database) {
-    if (this.#isContentEmpty())
+    if (this.#isContentEmpty()) {
       throw new Error("Memo content cannot be empty. Please enter some text.");
+    }
     await database.add(this.content);
   }
 
   async fetchAll(database) {
     const rows = await database.getAll();
-    if (!rows.length)
+    if (!rows.length) {
       throw new Error(
         "No memos available. Use the app without options to add a new memo.",
       );
+    }
     return rows.map(
       (row) => new MemoModel({ id: row.id, content: row.content }),
     );
