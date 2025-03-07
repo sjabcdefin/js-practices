@@ -62,12 +62,12 @@ class MemoApp {
     const rl = createInterface({
       input: process.stdin,
     });
-    let memoContent = "";
+    let memoContents = [];
     try {
       for await (const line of rl) {
-        memoContent += line + "\n";
+        memoContents.push(line);
       }
-      return memoContent.trimEnd();
+      return memoContents.join("\n");
     } finally {
       rl.close();
     }
