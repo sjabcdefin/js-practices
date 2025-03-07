@@ -73,7 +73,7 @@ class MemoApp {
     }
   }
 
-  async #selectMemo(action = "see") {
+  async #selectMemo(action) {
     const memos = await this.#fetchMemos();
     try {
       const { prompt } = enquirer;
@@ -117,7 +117,7 @@ class MemoApp {
   }
 
   async #displayMemoContent() {
-    const answer = await this.#selectMemo();
+    const answer = await this.#selectMemo("see");
     const memo = new MemoModel({ id: answer.memoId });
     await memo.fetchById(this.#database);
     console.log(memo.content);
