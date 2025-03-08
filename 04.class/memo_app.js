@@ -58,7 +58,7 @@ class MemoApp {
     return option;
   }
 
-  async #inputMemo() {
+  async #readMemoContentFromInput() {
     const rl = createInterface({
       input: process.stdin,
     });
@@ -107,7 +107,7 @@ class MemoApp {
   }
 
   async #addMemo() {
-    const content = await this.#inputMemo();
+    const content = await this.#readMemoContentFromInput();
     await new MemoModel({ content: content }).save(this.#database);
   }
 
