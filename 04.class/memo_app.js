@@ -113,7 +113,9 @@ class MemoApp {
 
   async #displayMemos() {
     const memos = await this.#fetchMemosForEnquirerPrompt();
-    memos.forEach((memo) => console.log(memo.name));
+    memos.forEach((memo) => {
+      console.log(memo.name);
+    });
   }
 
   async #displayMemoContent() {
