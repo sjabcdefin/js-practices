@@ -74,7 +74,7 @@ class MemoApp {
   }
 
   async #selectMemo(action) {
-    const memos = await this.#fetchMemos();
+    const memos = await this.#fetchMemosForEnquirerPrompt();
     try {
       const { prompt } = enquirer;
       const question = [
@@ -98,7 +98,7 @@ class MemoApp {
     }
   }
 
-  async #fetchMemos() {
+  async #fetchMemosForEnquirerPrompt() {
     const rows = await new MemoModel().fetchAll(this.#database);
     return rows.map((row) => ({
       name: row.content.split("\n")[0],
@@ -112,7 +112,7 @@ class MemoApp {
   }
 
   async #displayMemos() {
-    const memos = await this.#fetchMemos();
+    const memos = await this.#fetchMemosForEnquirerPrompt();
     memos.forEach((memo) => console.log(memo.name));
   }
 
