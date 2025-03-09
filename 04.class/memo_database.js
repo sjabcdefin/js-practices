@@ -28,12 +28,12 @@ class MemoDatabase {
     return await allQuery(this.#db, selectAllMemoQuery);
   }
 
-  async getById(memoID) {
-    return await getQuery(this.#db, selectMemoQuery, [memoID]);
+  async getById(id) {
+    return await getQuery(this.#db, selectMemoQuery, [id]);
   }
 
-  async delete(memoID) {
-    await runQuery(this.#db, deleteMemoQuery, [memoID]);
+  async delete(id) {
+    await runQuery(this.#db, deleteMemoQuery, [id]);
   }
 
   async closeDatabase() {
