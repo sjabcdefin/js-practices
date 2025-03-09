@@ -99,10 +99,10 @@ class MemoApp {
   }
 
   async #fetchMemosForEnquirerPrompt() {
-    const rows = await new MemoModel().fetchAll(this.#database);
-    return rows.map((row) => ({
-      name: row.content.split("\n")[0],
-      value: row.id,
+    const memos = await new MemoModel().fetchAll(this.#database);
+    return memos.map((memo) => ({
+      name: memo.content.split("\n")[0],
+      value: memo.id,
     }));
   }
 
