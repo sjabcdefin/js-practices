@@ -23,7 +23,7 @@ class MemoModel {
   }
 
   #isContentEmpty() {
-    return !this.#content;
+    return this.#content === "";
   }
 
   async save(database) {
