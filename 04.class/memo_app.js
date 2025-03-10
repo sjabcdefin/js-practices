@@ -90,7 +90,7 @@ class MemoApp {
       ];
       return await prompt(question);
     } catch (err) {
-      if (!err) {
+      if (err === "") {
         throw new Error("Selecting memo was canceled.");
       } else {
         throw err;
