@@ -8,6 +8,9 @@ class MemoApp {
 
   constructor() {
     this.#database = new MemoDatabase("memo.db");
+    process.on("SIGINT", async () => {
+      await this.#cleanupAndExit();
+    });
   }
 
   async executeMemoCommand() {
@@ -36,6 +39,12 @@ class MemoApp {
     } finally {
       await this.#database.closeDatabase();
     }
+  }
+
+  async #cleanupAndExit() {
+    console.log("\nCtrl+C was detected during operation.");
+    await this.#database.closeDatabase();
+    process.exit(1);
   }
 
   #hasMultipleOptions() {
@@ -91,7 +100,7 @@ class MemoApp {
       return await prompt(question);
     } catch (err) {
       if (err === "") {
-        throw new Error("Selecting memo was canceled.");
+        await this.#cleanupAndExit();
       } else {
         throw err;
       }
