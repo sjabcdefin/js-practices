@@ -1,11 +1,10 @@
 import sqlite3 from "sqlite3";
-import { runQuery, allQuery, getQuery, closeDatabase } from "./sqlite_utils.js";
+import { runQuery, allQuery, closeDatabase } from "./sqlite_utils.js";
 
 const createTableQuery =
   "CREATE TABLE IF NOT EXISTS memos (id INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT NOT NULL)";
 const insertMemoQuery = "INSERT INTO memos (content) VALUES (?)";
 const selectAllMemoQuery = "SELECT * FROM memos ORDER BY id";
-const selectMemoQuery = "SELECT * FROM memos WHERE id = ?";
 const deleteMemoQuery = "DELETE FROM memos WHERE id = ?";
 
 class MemoDatabase {
@@ -26,10 +25,6 @@ class MemoDatabase {
 
   async getAll() {
     return await allQuery(this.#db, selectAllMemoQuery);
-  }
-
-  async getById(id) {
-    return await getQuery(this.#db, selectMemoQuery, [id]);
   }
 
   async delete(id) {

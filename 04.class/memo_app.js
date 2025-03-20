@@ -89,7 +89,7 @@ class MemoApp {
       const question = [
         {
           type: "select",
-          name: "memoId",
+          name: "memo",
           message: `Choose a note you want to ${action}:`,
           choices: memos,
           result() {
@@ -108,16 +108,24 @@ class MemoApp {
   }
 
   async #fetchMemosForEnquirerPrompt() {
-    const memos = await new MemoModel().fetchAll(this.#database);
-    return memos.map((memo) => ({
-      name: memo.content.split("\n")[0],
-      value: memo.id,
+    const rows = await this.#database.getAll();
+    if (!rows.length) {
+      throw new Error(
+        "No memos available. Use the app without options to add a new memo.",
+      );
+    }
+    return rows.map((row) => ({
+      name: row.content.split("\n")[0],
+      value: new MemoModel(row.id, row.content),
     }));
   }
 
   async #addMemo() {
     const content = await this.#readMemoContentFromInput();
-    await new MemoModel({ content: content }).save(this.#database);
+    if (content === "") {
+      throw new Error("Memo content cannot be empty. Please enter some text.");
+    }
+    await this.#database.add(content);
   }
 
   async #displayMemos() {
@@ -129,14 +137,12 @@ class MemoApp {
 
   async #displayMemoContent() {
     const answer = await this.#selectMemo("see");
-    const memo = new MemoModel({ id: answer.memoId });
-    await memo.fetchById(this.#database);
-    console.log(memo.content);
+    console.log(answer.memo.content);
   }
 
   async #deleteMemo() {
     const answer = await this.#selectMemo("delete");
-    await new MemoModel({ id: answer.memoId }).delete(this.#database);
+    await this.#database.delete(answer.memo.id);
   }
 }
 
