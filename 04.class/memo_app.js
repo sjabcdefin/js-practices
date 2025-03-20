@@ -83,7 +83,12 @@ class MemoApp {
   }
 
   async #selectMemo(action) {
-    const memos = await this.#fetchMemosForEnquirerPrompt();
+    const memos = await this.#fetchMemos();
+    const memosForPrompt = memos.map((memo) => ({
+      name: memo.title,
+      value: memo,
+    }));
+
     try {
       const { prompt } = enquirer;
       const question = [
@@ -91,7 +96,7 @@ class MemoApp {
           type: "select",
           name: "memo",
           message: `Choose a note you want to ${action}:`,
-          choices: memos,
+          choices: memosForPrompt,
           result() {
             return this.focused.value;
           },
@@ -107,17 +112,14 @@ class MemoApp {
     }
   }
 
-  async #fetchMemosForEnquirerPrompt() {
+  async #fetchMemos() {
     const rows = await this.#database.getAll();
     if (!rows.length) {
       throw new Error(
         "No memos available. Use the app without options to add a new memo.",
       );
     }
-    return rows.map((row) => ({
-      name: row.content.split("\n")[0],
-      value: new MemoModel(row.id, row.content),
-    }));
+    return rows.map((row) => new MemoModel(row.id, row.content));
   }
 
   async #addMemo() {
@@ -129,9 +131,9 @@ class MemoApp {
   }
 
   async #displayMemos() {
-    const memos = await this.#fetchMemosForEnquirerPrompt();
+    const memos = await this.#fetchMemos();
     memos.forEach((memo) => {
-      console.log(memo.name);
+      console.log(memo.title);
     });
   }
 
