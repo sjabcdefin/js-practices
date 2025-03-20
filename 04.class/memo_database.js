@@ -19,11 +19,11 @@ class MemoDatabase {
     await runQuery(this.#db, createTableQuery);
   }
 
-  async add(content) {
+  async insert(content) {
     return await runQuery(this.#db, insertMemoQuery, [content]);
   }
 
-  async getAll() {
+  async selectAll() {
     return await allQuery(this.#db, selectAllMemoQuery);
   }
 

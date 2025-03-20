@@ -112,7 +112,7 @@ class MemoApp {
   }
 
   async #fetchMemos() {
-    const rows = await this.#database.getAll();
+    const rows = await this.#database.selectAll();
     if (!rows.length) {
       throw new Error(
         "No memos available. Use the app without options to add a new memo.",
@@ -126,7 +126,7 @@ class MemoApp {
     if (content === "") {
       throw new Error("Memo content cannot be empty. Please enter some text.");
     }
-    await this.#database.add(content);
+    await this.#database.insert(content);
   }
 
   async #displayMemos() {
