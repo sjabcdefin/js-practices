@@ -90,7 +90,6 @@ class MemoApp {
     }));
 
     try {
-      const { prompt } = enquirer;
       const question = [
         {
           type: "select",
@@ -102,7 +101,7 @@ class MemoApp {
           },
         },
       ];
-      return await prompt(question);
+      return await enquirer.prompt(question);
     } catch (err) {
       if (err === "") {
         await this.#cleanupAndExit();
