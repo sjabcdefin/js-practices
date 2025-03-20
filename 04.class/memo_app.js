@@ -15,7 +15,7 @@ class MemoApp {
 
   async processCommandLine() {
     try {
-      const option = this.#commandLineOption();
+      const option = this.#parseCommandLineOption();
       await this.#database.createTable();
       switch (option) {
         case "-l":
@@ -56,7 +56,7 @@ class MemoApp {
     return !options.includes(inputOption);
   }
 
-  #commandLineOption() {
+  #parseCommandLineOption() {
     const option = process.argv[2];
     if (this.#hasMultipleOptions()) {
       throw new Error("Only one option is allowed. Use one of: -l, -r, -d.");
