@@ -2,4 +2,4 @@
 
 import MemoApp from "./memo_app.js";
 
-new MemoApp().processCommandLine();
+new MemoApp().runOperationBasedOnOption();
