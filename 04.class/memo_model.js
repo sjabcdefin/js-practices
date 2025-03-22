@@ -20,8 +20,8 @@ class MemoModel {
     return this.#firstLineOfContent;
   }
 
-  set id(memoId) {
-    this.#id = memoId;
+  set id(id) {
+    this.#id = id;
   }
   set content(memoContent) {
     this.#content = memoContent;
