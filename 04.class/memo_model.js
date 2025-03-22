@@ -1,12 +1,11 @@
 class MemoModel {
   #id;
   #content;
-  #title;
+  #firstLineOfContent;
 
   constructor(id, content) {
     this.id = id;
     this.content = content;
-    this.title = content;
   }
 
   get id() {
@@ -17,8 +16,8 @@ class MemoModel {
     return this.#content;
   }
 
-  get title() {
-    return this.#title;
+  get firstLineOfContent() {
+    return this.#firstLineOfContent;
   }
 
   set id(memoId) {
@@ -26,10 +25,7 @@ class MemoModel {
   }
   set content(memoContent) {
     this.#content = memoContent;
-  }
-
-  set title(memoContent) {
-    this.#title = memoContent.split("\n")[0];
+    this.#firstLineOfContent = memoContent.split("\n")[0];
   }
 }
 

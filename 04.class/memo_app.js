@@ -85,7 +85,7 @@ class MemoApp {
   async #selectMemo(action) {
     const memos = await this.#fetchMemos();
     const memosForPrompt = memos.map((memo) => ({
-      name: memo.title,
+      name: memo.firstLineOfContent,
       value: memo,
     }));
 
@@ -132,7 +132,7 @@ class MemoApp {
   async #displayMemos() {
     const memos = await this.#fetchMemos();
     memos.forEach((memo) => {
-      console.log(memo.title);
+      console.log(memo.firstLineOfContent);
     });
   }
 
