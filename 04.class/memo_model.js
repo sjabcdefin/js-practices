@@ -1,7 +1,6 @@
 class MemoModel {
   #id;
   #content;
-  #firstLineOfContent;
 
   constructor(id, content) {
     this.id = id;
@@ -17,7 +16,7 @@ class MemoModel {
   }
 
   get firstLineOfContent() {
-    return this.#firstLineOfContent;
+    return this.#content.split("\n")[0];
   }
 
   set id(id) {
@@ -26,7 +25,6 @@ class MemoModel {
 
   set content(content) {
     this.#content = content;
-    this.#firstLineOfContent = content.split("\n")[0];
   }
 }
 
