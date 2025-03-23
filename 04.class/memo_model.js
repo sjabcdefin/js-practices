@@ -24,9 +24,9 @@ class MemoModel {
     this.#id = id;
   }
 
-  set content(memoContent) {
-    this.#content = memoContent;
-    this.#firstLineOfContent = memoContent.split("\n")[0];
+  set content(content) {
+    this.#content = content;
+    this.#firstLineOfContent = content.split("\n")[0];
   }
 }
 
