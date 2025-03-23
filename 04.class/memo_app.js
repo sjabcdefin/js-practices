@@ -13,7 +13,7 @@ class MemoApp {
     });
   }
 
-  async runOperationBasedOnOption() {
+  async run() {
     try {
       const option = this.#parseCommandLineOption();
       await this.#database.createTable();
